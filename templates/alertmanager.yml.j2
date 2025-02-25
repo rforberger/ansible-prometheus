@@ -1,0 +1,25 @@
+route:
+  receiver: "telepush"
+  routes:
+    - receiver: 'telepush'
+      match_re:
+        severity: critical
+      group_wait: 10s
+      group_by: [instance, alertname, datacenter, app]
+
+receivers:
+  - name: 'telegram-notifications'
+    telegram_configs:
+    - bot_token: "5621308840:AAFweSfPbB7bCmAK-wvL8FiyMXwxHMxI9Kg"
+      chat_id: 789610385
+      api_url: "https://api.telegram.org"
+      send_resolved: true
+      parse_mode: "HTML"
+      message: '{{ '{{' }} template "telegram.text" {{ '.}}' }}'
+  - name: 'telepush'
+    webhook_configs:
+      - url: 'https://telepush.dev/api/inlets/alertmanager/86d951'
+        http_config:
+templates:
+  - "/etc/alertmanager/*.tmpl"
+

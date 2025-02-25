@@ -1,0 +1,8 @@
+---
+
+- name: restart prometheus
+  ansible.builtin.shell:
+    cmd: "dockerctl.py stop prometheus && dockerctl.py start prometheus; dockerctl.py stop prometheus-alertmanager && dockerctl.py start prometheus-alertmanager"
+
+
+

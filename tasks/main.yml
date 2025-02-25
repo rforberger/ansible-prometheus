@@ -1,0 +1,26 @@
+---
+
+- name: Create conf dir
+  ansible.builtin.file:
+    path: "/etc/prometheus"
+    state: directory
+
+
+- name: Write configs
+  ansible.builtin.template:
+    dest: "{{ item.dest }}"
+    src: "{{ item.src }}"
+  loop:
+    - { src: "prometheus.yml.j2", dest: "/etc/prometheus/prometheus.yml" }
+    - { src: "alert-rules.yml.j2", dest: "/etc/prometheus/alert-rules.yml" }
+    - { src: "alertmanager.yml.j2", dest: "/etc/prometheus/alertmanager.yml" }
+    - { src: "alert.tmpl.j2", dest: "/etc/prometheus/alert.tmpl" }
+  #notify:
+  #  - restart prometheus
+
+
+
+
+
+
+

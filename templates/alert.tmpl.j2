@@ -1,0 +1,15 @@
+{{ '{{' }} define "telegram.text" {{ '}}' }}
+{{ '{{' }} range .Alerts.Firing {{ '}}' }}
+
+<b>{{ '{{' }} .Labels.alertname {{ '}}' }} on {{ '{{' }} .Labels.instance {{ '}}' }}</b>
+{{ '{{' }} if ne .Annotations.summary "" {{ '}}' }}{{ '{{' }} .Annotations.summary {{ '}}' }}{{ '{{' }} end {{ '}}' }}
+
+Details:
+
+{{ '{{' }} .Annotations.description {{ '}}' }}
+
+App: {{ '{{' }} .Labels.app {{ '}}' }}
+Datacenter: {{ '{{' }} .Labels.datacenter {{ '}}' }}
+
+{{ '{{' }} end {{ '}}' }}
+{{ '{{' }} end {{ '}}' }}
